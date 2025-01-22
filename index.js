@@ -6,8 +6,8 @@ const mongoose = require("mongoose");
 const mongodbRoute =  process.env.MONGO_URI;
 
 //Routes
-const playersRoutes = require('./routes/players');
-const timeRoutes = require('./routes/time');
+const playersRoutes = require('./src/routes/players');
+const timeRoutes = require('./src/routes/time');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -33,3 +33,4 @@ async function start() {
 }
 
 start();
+

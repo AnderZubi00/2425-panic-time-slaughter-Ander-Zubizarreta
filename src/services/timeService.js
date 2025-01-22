@@ -5,8 +5,8 @@ const getAllTimeRecords = async () => {
 };
 
 const createTimeRecord = async (timeData) => {
-  const timeRecord = new Time(timeData);
-  return await timeRecord.save();
+  const time = new Time(timeData);
+  return await time.save();
 };
 
 module.exports = { getAllTimeRecords, createTimeRecord };
