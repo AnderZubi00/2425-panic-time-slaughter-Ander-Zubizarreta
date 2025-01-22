@@ -1,6 +1,6 @@
 const timeService = require('../services/timeService');
 const Character = require('../models/Characters');
-const { morningCycle, middayCycle, afternoonCycle, performNightCycle, performDatabaseUpdate } = require('../../gameLogic');
+const { morningCycle, middayCycle, afternoonCycle, performNightCycle, performDatabaseUpdate, showMessages } = require('../../gameLogic');
 
 const getTimeHistory = async (req, res) => {
     try {
@@ -36,12 +36,17 @@ const postTime = async (req, res) => {
 
         await performDatabaseUpdate(characters, timeRecord);
 
+        showMessages(timeRecord.day_number , timeRecord.km.km_traveled, timeRecord.km_total);
+
         console.log('Ciclo de juego completado:', {
             morningResults,
             middayResults,
             afternoonResults,
             nightResults
         });
+        if (action.action === 'regional_chant') {
+            console.log(`${action.performer} canta "${action.song}" para animar al equipo.`);
+          } 
 
         res.status(200).json({
             message: 'Ciclo de juego completado.',

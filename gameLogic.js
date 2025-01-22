@@ -268,75 +268,6 @@ const performNightCycle = (characters) => {
       });
     }
   
-    // // Recuperación de stamina
-    // characters.forEach((character) => {
-    //   const { stamina } = character.stats;
-    //   if (stamina < 20) {
-    //     // Come 2 alimentos si dispone de ellos
-    //     const foodItems = character.equipment.saddlebag.splice(0, 2);
-    //     foodItems.forEach(food => {
-    //       character.stats.stamina += food.recover_stamina;
-    //     });
-    //     results.push({
-    //       action: 'stamina_recovery',
-    //       character: character.name,
-    //       foodConsumed: foodItems.map(f => f.name),
-    //       staminaRecovered: foodItems.reduce((sum, food) => sum + food.recover_stamina, 0)
-    //     });
-    //   } else if (stamina >= 20 && stamina <= 50) {
-    //     // Come 1 alimento si dispone de él
-    //     const foodItem = character.equipment.saddlebag.shift();
-    //     if (foodItem) {
-    //       character.stats.stamina += foodItem.recover_stamina;
-    //       results.push({
-    //         action: 'stamina_recovery',
-    //         character: character.name,
-    //         foodConsumed: [foodItem.name],
-    //         staminaRecovered: foodItem.recover_stamina
-    //       });
-    //     }
-    //   }else if(foodItems.length === 0) {
-    //         results.push({
-    //           action: 'stamina_recovery',
-    //           character: character.name,
-    //           foodConsumed: [],
-    //           staminaRecovered: 0
-    //         });
-    //   }
-    // });
-  
-    // // Calidad de las armas
-    // characters.forEach((character) => {
-    //   character.equipment.weapons.forEach((weapon) => {
-    //     if (weapon.type === 'common') {
-    //       weapon.quality = Math.max(0, weapon.quality - 1);
-    //     } else if (weapon.type === 'arcane') {
-    //       weapon.quality = Math.min(50, weapon.quality + 1);
-    //     }
-    //     results.push({
-    //       action: 'weapon_quality_change',
-    //       character: character.name,
-    //       weapon: weapon.name,
-    //       newQuality: weapon.quality
-    //     });
-    //   });
-    // });
-  
-    // // Sanacion
-    // const priest = characters.find(c => c.occupation === 'priest');
-    // if (priest) {
-    //   characters.forEach((character) => {
-    //     const healing = rollDice(3);
-    //     character.stats.strength += healing;
-    //     results.push({
-    //       action: 'healing',
-    //       healer: priest.name,
-    //       target: character.name,
-    //       healingPoints: healing
-    //     });
-    //   });
-    // }
-  
     // Descanso
     results.push({ action: 'rest', message: 'El equipo descansa hasta la mañana siguiente.' });
   
@@ -357,7 +288,14 @@ const performNightCycle = (characters) => {
     return { message: 'Base de datos actualizada.' };
   };
 
-  module.exports = { rollDice, morningCycle, middayCycle, afternoonCycle, performNightCycle, performDatabaseUpdate };
+  const showMessages = (dayNumber, dayOfWeek, kmTotal) => {
+    console.log(`\n=== Día ${dayNumber} (${dayOfWeek}) ===`);
+    console.log(`Kilómetros totales recorridos: ${kmTotal} km\n`);
+    
+  };
+  
+
+  module.exports = { rollDice, morningCycle, middayCycle, afternoonCycle, performNightCycle, performDatabaseUpdate, showMessages };
 
 
 
